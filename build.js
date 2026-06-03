@@ -44,5 +44,6 @@ ejs.renderFile(indexEjsPath, {}, { views: [viewsDir] }, (err, html) => {
   }
   
   fs.writeFileSync(path.join(docsDir, 'index.html'), html);
+  fs.writeFileSync(path.join(docsDir, '.nojekyll'), '');
   console.log('Successfully compiled views/index.ejs to docs/index.html!');
 });
