@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('partials/head') %>
+    <title>Shadman Shahriar — Editorial Portfolio</title>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+
+    <!-- ════════════════════════════════════════════
+       HERO SECTION
+       ════════════════════════════════════════════ -->
+    <main class="container">
+      <section class="hero" id="hero" data-cursor-label="start here.">
+        <div class="hero-label reveal">
+          <span class="label-tag">Software Developer / AI Researcher</span>
+        </div>
+        <h1 class="hero-name reveal hero-name-toggle" id="hero-name-toggle" data-cursor-label="start here.">
+          SHADMAN<br />SHAHRIAR
+        </h1>
+        <div class="hero-location reveal">
+          <span class="caption-meta">Dhaka, Bangladesh</span>
+        </div>
+
+        <!-- About Reveal (hidden by default, revealed on hero-name click) -->
+        <div class="hero-about-reveal" id="hero-about-reveal"
+          data-about-text="Software Developer specializing in scalable backend systems and AI research. Dedicated to building robust technological solutions and advancing the field of artificial intelligence through rigorous research and development.">
+          <p class="about-text hero-about-stream" id="hero-about-stream"></p>
+          <div class="hero-about-cursor" id="hero-about-cursor"></div>
+          <button class="hero-about-close" id="hero-about-close" data-cursor-label="close">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ════════════════════════════════════════════
+       MARQUEE
+       ════════════════════════════════════════════ -->
+    <section class="marquee-section">
+      <div class="marquee-track">
+        <span class="marquee-content">Python · Java · C · C++ · HTML/CSS · JavaScript · MySQL · Fortran · Prolog ·
+          PyTorch · Scikit-learn · Pandas · NumPy · REST APIs · Tensorflow · Keras · Nodejs · Expressjs · GitHub ·
+          BitBucket · Notion · LaTeX · MCP · Agentic AI ·&nbsp;</span>
+        <span class="marquee-content">Python · Java · C · C++ · HTML/CSS · JavaScript · MySQL · Fortran · Prolog ·
+          PyTorch · Scikit-learn · Pandas · NumPy · REST APIs · Tensorflow · Keras · Nodejs · Expressjs · GitHub ·
+          BitBucket · Notion · LaTeX · MCP · Agentic AI ·&nbsp;</span>
+      </div>
+    </section>
+
+    <!-- About section is now embedded inside the hero via the click-to-reveal interaction -->
+
+    <!-- ════════════════════════════════════════════
+       PROJECTS SECTION
+       ════════════════════════════════════════════ -->
+    <section class="page-section" id="projects" data-cursor-label="selected works.">
+      <div class="container">
+        <header class="page-header reveal">
+          <h2 class="section-heading">Projects</h2>
+          <p class="body-main text-secondary">A collection of research and development in scalable systems and AI.</p>
+          <hr class="divider" />
+        </header>
+
+        <div class="projects-grid">
+
+          <!-- Project 1 -->
+          <a class="project-card reveal" href="https://github.com/afifaimrann/DriveHive-327" target="_blank" data-cursor-label="know more">
+            <div class="project-card-image">
+              <img alt="Server room infrastructure"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgcO3h8DVFJ9vjivyGqB5nZ5StaN3dPnkLpgu9-6DKlvRPM2wulP_s0ZI6L-Xg36zdbhXjM_8sBFmItoazCcHr2T84ymS5dhyCFr4s66bVGz5MKD0n1504eSpnz3V14vCAJpG1ktOvabJfTjp9AF_yE8sVYaXPS1bPvMjWYE3Uj-97C5bdvr78biaqaieS6voejTSjCchE-gcOImt4AoIOksJ0YCoI35HMxBtA4EIX4OE71EFiXn2_N1qdxuSV2PSZtsrwrez01dWl" />
+            </div>
+            <div class="project-card-body">
+              <div class="project-meta">
+                <span class="label-tag">BACKEND / CLOUD</span>
+                <span class="caption-meta text-muted">2025</span>
+              </div>
+              <h3 class="project-title">Web App and Telegram based Cloud Storage Aggregator</h3>
+              <p class="body-main text-secondary">Scalable cloud storage platform using Firestore and API-based
+                multi-provider integration. Seamlessly connect different free tier providers, VectorDB and chat feature
+                coming soon.</p>
+              <div class="project-tags">
+                <span class="tag">Firestore</span>
+                <span class="tag">LLM Integration</span>
+                <span class="tag">NodeJs</span>
+                <span class="tag">Vite</span>
+                <span class="tag">Google API</span>
+                <span class="tag">Dropbox API</span>
+                <span class="tag">Telegram Bot</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal" data-cursor-label="coming soon">
+            <div class="project-card-image">
+              <img alt="Audio waveform visualization"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM072cTg02WPC3UjjFt7UhhAQy01L9SNTn8XppmdHYIgpDFxhmyPv3DJFsqHm1vo8BFFXwurjpB8poI2e4mS5BlgetWbaj3N0Eiu0-DHRryQbTRo9cEpEeN2-6KKK6c9v7o9VsqR991gxno1c5bKP7WdoqAMQwj-gc4eBEbDMqYldtNapu7Lvo1TG_0hwAANJQWEyeNnrB58InQijigrg6fBNsJJO1W0p72Q7bR01ldtwqbsT4obG6gPGfmX5WCNV3OoLgNoilWN4K" />
+            </div>
+            <div class="project-card-body">
+              <div class="project-meta">
+                <span class="label-tag">AI / MACHINE LEARNING</span>
+                <span class="caption-meta text-muted">2023</span>
+              </div>
+              <h3 class="project-title">Sposhto AI: Bengali Audio Deepfake Detecting App</h3>
+              <p class="body-main text-secondary">Trained deep learning model achieving 91% accuracy, compressed for
+                edge deployment on Android.</p>
+              <div class="project-tags">
+                <span class="tag">Deep Learning</span>
+                <span class="tag">Edge Deployment</span>
+                <span class="tag">Tensorflow</span>
+                <span class="tag">Tensorflow Lite</span>
+                <span class="tag">Librosa</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal" data-cursor-label="coming soon">
+            <div class="project-card-image">
+              <img alt="Medical imaging analysis"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbzW2B0gyoa9SKW1J4vhXPfM1m3CBS3Likbm6w_MOwc6I6izkTkUyvzvT4w-B2xsayxvT5fpuoUBoo1FfHzw8X3iqUXF2aqzrWtKLEHxJq344QcAU7Dcafg1_F8sphn2RmRmbuloDJAMeHbv9mdcuAW6VdA8uOM0K8CxzF_xxD-t9ji0FWrECTSVV5hL1ogtn2mUmkxx8V8I84xqzqb2I8VKfnfOYwkdAHerUR9yp0x4Bac36_WQhmH9kNEMPmqK6rp11vJcD7Bgq3" />
+            </div>
+            <div class="project-card-body">
+              <div class="project-meta">
+                <span class="label-tag">COMPUTER VISION / RESEARCH</span>
+                <span class="caption-meta text-muted">2026</span>
+              </div>
+              <h3 class="project-title">Open Set Polyp Segmentation</h3>
+              <p class="body-main text-secondary">Novel framework integrating Open-Set Learning (OSL) for medical image
+                analysis. Under review at a Q1 journal.</p>
+              <div class="project-tags">
+                <span class="tag">Computer Vision</span>
+                <span class="tag">Research</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <a class="project-card reveal" href="https://github.com/navid1111/retail_os" target="_blank" data-cursor-label="know more">
+            <div class="project-card-image">
+              <img alt="RetailOS AI shelf analysis dashboard" src="/images/retailos.png" />
+            </div>
+            <div class="project-card-body">
+              <div class="project-meta">
+                <span class="label-tag">FULL-STACK / AI</span>
+                <span class="caption-meta text-muted">2026</span>
+              </div>
+              <h3 class="project-title">RetailOS: AI-Native Retail Execution & Shelf Analysis Platform</h3>
+              <p class="body-main text-secondary">Full-stack platform with async Redis/BullMQ queue running YOLO product
+                detection and Gemini API shelf analysis. Built-in fraud detection engine and Prometheus/Grafana
+                monitoring.</p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">YOLO</span>
+                <span class="tag">Gemini API</span>
+                <span class="tag">Redis</span>
+                <span class="tag">MongoDB</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Project 5 -->
+          <a class="project-card reveal" href="https://github.com/HaughtyNavigator/DermAI" target="_blank" data-cursor-label="know more">
+            <div class="project-card-image">
+              <img alt="DermAI skin disease classification interface" src="/images/dermai.png" />
+            </div>
+            <div class="project-card-body">
+              <div class="project-meta">
+                <span class="label-tag">AI / MEDICAL</span>
+                <span class="caption-meta text-muted">2026</span>
+              </div>
+              <h3 class="project-title">DermAI: Skin Disease Classifier & Advisory System</h3>
+              <p class="body-main text-secondary">Modular AI pipeline classifying skin lesions via EfficientNetV2 and
+                delivering contextual medical advice through a RAG system with ChromaDB and LLM generation.</p>
+              <div class="project-tags">
+                <span class="tag">PyTorch</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">ChromaDB</span>
+                <span class="tag">RAG</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+       SKILLS SECTION
+       ════════════════════════════════════════════ -->
+    <section class="page-section" id="skills" data-cursor-label="technical skills.">
+      <div class="container">
+
+        <header class="page-header reveal">
+          <h2 class="hero-name">Technical Expertise</h2>
+        </header>
+
+        <div class="skills-layout">
+          <!-- Skills Categories -->
+          <div class="skills-categories">
+
+            <!-- Languages -->
+            <div class="skill-group reveal">
+              <h3 class="section-heading skill-group-title">Languages</h3>
+              <div class="skill-inline-list">
+                <span class="skill-inline-item">Python</span>
+                <span class="skill-inline-item">Java</span>
+                <span class="skill-inline-item">C</span>
+                <span class="skill-inline-item">C++</span>
+                <span class="skill-inline-item">HTML/CSS</span>
+                <span class="skill-inline-item">JavaScript</span>
+                <span class="skill-inline-item">MySQL</span>
+                <span class="skill-inline-item">Fortran</span>
+                <span class="skill-inline-item">Prolog</span>
+              </div>
+            </div>
+
+            <!-- Developer Tools -->
+            <div class="skill-group reveal">
+              <h3 class="section-heading skill-group-title">Developer Tools</h3>
+              <div class="skill-inline-list">
+                <span class="skill-inline-item">Google Colab</span>
+                <span class="skill-inline-item">Kaggle</span>
+                <span class="skill-inline-item">VS Code</span>
+                <span class="skill-inline-item">Eclipse</span>
+                <span class="skill-inline-item">Google Cloud Platform</span>
+              </div>
+            </div>
+
+            <!-- Technologies & Frameworks -->
+            <div class="skill-group reveal">
+              <h3 class="section-heading skill-group-title">Technologies &amp; Frameworks</h3>
+              <div class="skill-chip-list">
+                <span class="tag">PyTorch</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">NumPy</span>
+                <span class="tag">REST APIs</span>
+                <span class="tag">Tensorflow</span>
+                <span class="tag">Keras</span>
+                <span class="tag">Nodejs</span>
+                <span class="tag">Expressjs</span>
+                <span class="tag">GitHub</span>
+                <span class="tag">BitBucket</span>
+                <span class="tag">Notion</span>
+                <span class="tag">LaTeX</span>
+                <span class="tag">MCP</span>
+                <span class="tag">Agentic AI</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3D Rotating Artifact -->
+          <div class="skills-artifact reveal" data-cursor-label="always learning.">
+            <div class="artifact-scene">
+              <div class="artifact-gyroscope">
+                <!-- Orbital rings at different axes -->
+                <div class="artifact-ring ring-1"></div>
+                <div class="artifact-ring ring-2"></div>
+                <div class="artifact-ring ring-3"></div>
+                <!-- Glowing core -->
+                <div class="artifact-core"></div>
+                <!-- Floating particles -->
+                <div class="artifact-particle p1"></div>
+                <div class="artifact-particle p2"></div>
+                <div class="artifact-particle p3"></div>
+                <div class="artifact-particle p4"></div>
+                <div class="artifact-particle p5"></div>
+                <div class="artifact-particle p6"></div>
+              </div>
+            </div>
+
+            <!-- Interactive 3D Rubik's Cube -->
+            <div class="rubiks-scene" id="rubiks-scene" data-cursor-label="drag to rotate.">
+              <div class="rubiks-cube" id="rubiks-cube">
+                <!-- Front: Red -->
+                <div class="cube-face face-front">
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                  <div class="cell red"></div>
+                </div>
+                <!-- Back: Orange -->
+                <div class="cube-face face-back">
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                  <div class="cell orange"></div>
+                </div>
+                <!-- Left: Blue -->
+                <div class="cube-face face-left">
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                  <div class="cell blue"></div>
+                </div>
+                <!-- Right: Green -->
+                <div class="cube-face face-right">
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                  <div class="cell green"></div>
+                </div>
+                <!-- Top: White -->
+                <div class="cube-face face-top">
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                  <div class="cell white"></div>
+                </div>
+                <!-- Bottom: Yellow -->
+                <div class="cube-face face-bottom">
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                  <div class="cell yellow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+       ACCOLADES SECTION
+       ════════════════════════════════════════════ -->
+    <section class="page-section" id="accolades" data-cursor-label="achievements.">
+      <div class="container accolades-container">
+
+        <!-- Section 1: Academic Excellence -->
+        <div class="accolade-row reveal">
+          <div class="accolade-text">
+            <h2 class="section-heading accolade-title">Academic Excellence</h2>
+            <p class="accolade-description">
+              Graduated North South University with Bachelor of Science in Computer Science and Engineering with a CGPA
+              of 3.87, being awarded with the highest academic honor Summa Cum Laude.
+            </p>
+          </div>
+          <div class="accolade-image">
+            <div class="accolade-image-frame">
+              <span class="material-symbols-outlined accolade-icon">school</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Section 2: Capstone Project Showcase -->
+        <div class="accolade-row accolade-row-reverse reveal">
+          <div class="accolade-image">
+            <img class="accolade-img" alt="Capstone Project Showcase Awards" src="/images/capstone.jpg" />
+          </div>
+          <div class="accolade-text">
+            <h3 class="project-title-heading accolade-subtitle">Capstone Project Showcase and Innovation Challenge</h3>
+            <div class="caption-meta text-muted accolade-date">April, 2026 · North South University</div>
+            <p class="accolade-description">
+              Won 3 out of 5 awards: 2nd Runner-Up, Best Innovative Idea, Best Poster. Recognized by industry leaders
+              among graduating capstone teams for technical innovation, presentation quality, and project impact.
+            </p>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <!-- Section 3: National Idea Pitching -->
+        <div class="accolade-row reveal">
+          <div class="accolade-text">
+            <h3 class="project-title-heading accolade-subtitle">National Idea Pitching Competition (Creaventure)</h3>
+            <div class="caption-meta text-muted accolade-date">December, 2022 · North South University</div>
+            <p class="accolade-description">
+              Winner. Won a national cross-university startup pitching competition among 300+ teams.
+            </p>
+          </div>
+          <div class="accolade-image">
+            <img class="accolade-img" alt="National Idea Pitching Competition Winner" src="/images/pitching.jpg" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+       CONTACT SECTION
+       ════════════════════════════════════════════ -->
+    <section class="contact-section" id="contact" data-cursor-label="let's talk.">
+      <div class="contact-canvas" id="contact-canvas-wrap">
+        <div class="contact-content reveal">
+          <h2 class="hero-name contact-heading" id="contact-heading">
+            <span class="contact-line"><span>MADE IT THIS FAR?</span></span>
+            <span class="contact-line"><span>LET'S BUILD SOMETHING</span></span>
+            <span class="contact-line"><span><span class="it" id="contact-target-word">GREAT.</span></span></span>
+          </h2>
+          <div class="contact-buttons">
+            <a class="contact-btn magnetic-btn" href="/Shadman_latest_resume.pdf" download="Shadman_latest_resume.pdf" data-cursor-label="download resume">
+              <span class="btn-content">
+                <img src="/images/file.png" alt="Resume" class="btn-icon" />
+                <span class="btn-text">Resume</span>
+              </span>
+            </a>
+            <a class="contact-btn magnetic-btn" href="http://www.linkedin.com/in/shahriarshadman" target="_blank" data-cursor-label="visit linkedin">
+              <span class="btn-content">
+                <img src="/images/linkedin.png" alt="LinkedIn" class="btn-icon" />
+                <span class="btn-text">LinkedIn</span>
+              </span>
+            </a>
+            <a class="contact-btn magnetic-btn" href="mailto:shadmanshahriar89@gmail.com" data-cursor-label="send email">
+              <span class="btn-content">
+                <img src="/images/mail.png" alt="Email" class="btn-icon" />
+                <span class="btn-text">Email</span>
+              </span>
+            </a>
+            <a class="contact-btn magnetic-btn" href="https://github.com/HaughtyNavigator" target="_blank"
+              data-cursor-label="visit github">
+              <span class="btn-content">
+                <img src="/images/github.png" alt="GitHub" class="btn-icon" />
+                <span class="btn-text">GitHub</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Decorative Lines -->
+        <div class="contact-line-decor contact-line-top"></div>
+        <div class="contact-line-decor contact-line-bottom"></div>
+
+        <!-- Canvas Reveal Elements -->
+        <canvas id="contact-dark-cv" aria-hidden="true"></canvas>
+        <canvas id="contact-light-cv" aria-hidden="true"></canvas>
+        <div id="contact-cursor" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <%- include('partials/footer') %>
+</body>
+
+</html>

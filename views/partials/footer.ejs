@@ -1,0 +1,760 @@
+<footer class="site-footer" data-cursor-label="you made it.">
+  <p class="footer-text">
+    MADE WITH LOVE AND PASSION &nbsp;||&nbsp; SHADMAN SHAHRIAR &nbsp;||&nbsp; 2026
+  </p>
+</footer>
+
+<script>
+  // ── Theme Toggle ──
+  (function () {
+    const toggle = document.getElementById('theme-toggle');
+    const stored = localStorage.getItem('theme');
+
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.body.classList.add('dark-mode');
+    }
+
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+      });
+    }
+
+    // ── Mobile Menu ──
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        const icon = menuBtn.querySelector('.material-symbols-outlined');
+        icon.textContent = navLinks.classList.contains('open') ? 'close' : 'menu';
+      });
+
+      // Close menu on link click
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          const icon = menuBtn.querySelector('.material-symbols-outlined');
+          if (icon) icon.textContent = 'menu';
+        });
+      });
+    }
+
+    // ── Custom Cursor ──
+    (function () {
+      if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 1024) {
+        return;
+      }
+
+      // 1. Create the Custom Pointer Dot
+      const pointerDot = document.createElement('div');
+      pointerDot.className = 'custom-cursor-dot';
+      document.body.appendChild(pointerDot);
+
+      // 2. Create the Trailing Context Label Box
+      const cursorLabel = document.createElement('div');
+      cursorLabel.className = 'custom-cursor-label';
+      const cursorLabelText = document.createElement('span');
+      cursorLabelText.className = 'custom-cursor-label-text';
+      cursorLabel.appendChild(cursorLabelText);
+      document.body.appendChild(cursorLabel);
+
+      let mouseX = 0, mouseY = 0;
+      let labelX = 0, labelY = 0;
+      let isVisible = false;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!isVisible) {
+          pointerDot.style.opacity = '1';
+          isVisible = true;
+        }
+      });
+
+      // Unified frame update loop
+      function updateCursorPositions() {
+        // Dot tracks mouse exactly (zero latency for crisp clicks)
+        pointerDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+        // Label trails behind with a smooth inertia lag
+        const lerpFactor = 0.12;
+        labelX += (mouseX - labelX) * lerpFactor;
+        labelY += (mouseY - labelY) * lerpFactor;
+        
+        // Offset the text capsule to the bottom-right of the pointer dot
+        cursorLabel.style.transform = `translate3d(${labelX + 16}px, ${labelY + 16}px, 0)`;
+
+        requestAnimationFrame(updateCursorPositions);
+      }
+      updateCursorPositions();
+
+      // Typewriter Animation Logic
+      let currentText = "";
+      let targetText = "";
+      let typeTimeout = null;
+      const typeSpeed = 22; // Quick typewriter rate per character
+
+      function typeWriter() {
+        if (currentText !== targetText) {
+          if (targetText === "") {
+            // Delete characters backwards
+            currentText = currentText.slice(0, -1);
+          } else if (targetText.startsWith(currentText)) {
+            // Add next character
+            currentText = targetText.slice(0, currentText.length + 1);
+          } else {
+            // If target changed to another word, delete first
+            currentText = currentText.slice(0, -1);
+          }
+
+          cursorLabelText.textContent = currentText;
+
+          // Toggle visibility class based on whether text is empty
+          if (currentText === "") {
+            cursorLabel.classList.remove('has-label');
+          } else {
+            cursorLabel.classList.add('has-label');
+          }
+
+          typeTimeout = setTimeout(typeWriter, typeSpeed);
+        } else {
+          typeTimeout = null;
+        }
+      }
+
+      function updateTargetText(newText) {
+        targetText = newText || "";
+        if (!typeTimeout) {
+          typeWriter();
+        }
+      }
+
+      document.addEventListener('mouseover', (e) => {
+        // Hover state for custom context labels
+        const targetWithLabel = e.target.closest('[data-cursor-label]');
+        if (targetWithLabel) {
+          const label = targetWithLabel.getAttribute('data-cursor-label');
+          if (label) {
+            updateTargetText(label);
+            pointerDot.classList.add('is-hovering-interactive');
+            return;
+          }
+        } else {
+          updateTargetText("");
+        }
+
+        // Generic hover state for standard interactive elements (hollow expanding circle)
+        const isInteractive = e.target.closest('a, button, [role="button"], .project-card, .theme-toggle, .mobile-menu-btn');
+        if (isInteractive) {
+          pointerDot.classList.add('is-hovering-interactive');
+        } else {
+          pointerDot.classList.remove('is-hovering-interactive');
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        updateTargetText("");
+        pointerDot.style.opacity = '0';
+        isVisible = false;
+      });
+
+      document.addEventListener('mouseenter', () => {
+        pointerDot.style.opacity = '1';
+        isVisible = true;
+      });
+    })();
+
+    // ── Scroll Spy (Active Nav Link) ──
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('section[id], header[id], main section[id]');
+      const navItems = document.querySelectorAll('.nav-link');
+
+      function changeActiveLink() {
+        let index = sections.length;
+
+        while(--index && window.scrollY + 120 < sections[index].offsetTop) {}
+        
+        navItems.forEach((item) => item.classList.remove('active'));
+        if (sections[index]) {
+          const id = sections[index].getAttribute('id');
+          const activeItem = document.querySelector(`.nav-link[href="#${id}"]`);
+          if (activeItem) {
+            activeItem.classList.add('active');
+          }
+        }
+      }
+
+      changeActiveLink();
+      window.addEventListener('scroll', changeActiveLink);
+
+      // ── Page Entrance Animation ──
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(el => observer.observe(el));
+
+      // ── Hero Name ↔ About Toggle (LLM Streaming Effect) ──
+      const heroNameToggle = document.getElementById('hero-name-toggle');
+      const heroAboutClose = document.getElementById('hero-about-close');
+      const heroSection = document.getElementById('hero');
+      const heroAboutReveal = document.getElementById('hero-about-reveal');
+      const heroAboutStream = document.getElementById('hero-about-stream');
+      const heroAboutCursor = document.getElementById('hero-about-cursor');
+      let streamTimeout = null;
+      let isStreaming = false;
+
+      function streamWords() {
+        if (!heroAboutReveal || !heroAboutStream) return;
+
+        const fullText = heroAboutReveal.getAttribute('data-about-text') || '';
+        const words = fullText.split(/\s+/);
+        
+        // Clear previous content
+        heroAboutStream.innerHTML = '';
+        heroAboutClose.classList.remove('show');
+
+        // Pre-create all word spans (hidden)
+        const wordSpans = words.map((word, i) => {
+          const span = document.createElement('span');
+          span.className = 'stream-word';
+          span.textContent = word;
+          heroAboutStream.appendChild(span);
+          // Add space between words
+          if (i < words.length - 1) {
+            heroAboutStream.appendChild(document.createTextNode(' '));
+          }
+          return span;
+        });
+
+        // Start blinking cursor
+        heroAboutCursor.classList.add('streaming');
+        isStreaming = true;
+
+        // Stream words in one by one with variable timing (like LLM tokens)
+        let index = 0;
+
+        function revealNext() {
+          if (index >= wordSpans.length) {
+            // Streaming complete
+            isStreaming = false;
+            heroAboutCursor.classList.remove('streaming');
+            // Show close button after a small pause
+            setTimeout(() => {
+              heroAboutClose.classList.add('show');
+            }, 300);
+            return;
+          }
+
+          wordSpans[index].classList.add('visible');
+          index++;
+
+          // Variable delay to mimic LLM token generation
+          // Faster at start, occasionally pausing (like thinking)
+          let delay;
+          if (index % 8 === 0) {
+            delay = 180 + Math.random() * 120; // Longer "thinking" pause every ~8 words
+          } else {
+            delay = 40 + Math.random() * 50;   // Normal fast token speed
+          }
+
+          streamTimeout = setTimeout(revealNext, delay);
+        }
+
+        // Begin streaming after a short delay (let the container fade in first)
+        streamTimeout = setTimeout(revealNext, 400);
+      }
+
+      function resetStream() {
+        // Cancel any in-progress streaming
+        if (streamTimeout) {
+          clearTimeout(streamTimeout);
+          streamTimeout = null;
+        }
+        isStreaming = false;
+        if (heroAboutStream) heroAboutStream.innerHTML = '';
+        if (heroAboutCursor) heroAboutCursor.classList.remove('streaming');
+        if (heroAboutClose) heroAboutClose.classList.remove('show');
+      }
+
+      if (heroNameToggle && heroSection) {
+        heroNameToggle.addEventListener('click', () => {
+          heroSection.classList.add('hero--about-visible');
+          // Start streaming after the name fades out
+          setTimeout(streamWords, 500);
+        });
+      }
+
+      if (heroAboutClose && heroSection) {
+        heroAboutClose.addEventListener('click', () => {
+          resetStream();
+          heroSection.classList.remove('hero--about-visible');
+        });
+      }
+
+      // ── 3D Rubik's Cube Interactive Rotation ──
+      const cube = document.getElementById('rubiks-cube');
+      const scene = document.getElementById('rubiks-scene');
+      
+      if (cube && scene) {
+        let isDragging = false;
+        let startX, startY;
+        let currentRx = -20; // Initial rotation X
+        let currentRy = 35;  // Initial rotation Y
+        let vx = 0;          // drag velocity X
+        let vy = 0;          // drag velocity Y
+        let lastTime = performance.now();
+
+        // Auto-rotation speeds (deg per ms)
+        const autoSpeedX = 0.015;
+        const autoSpeedY = 0.02;
+
+        function updateCubeTransform() {
+          cube.style.transform = `rotateX(${currentRx}deg) rotateY(${currentRy}deg)`;
+        }
+
+        // Initialize position
+        updateCubeTransform();
+
+        function animate(time) {
+          const dt = Math.min(time - lastTime, 100); // cap dt to avoid tab-inactive spikes
+          lastTime = time;
+
+          if (!isDragging) {
+            // Apply friction/decay to user drag velocities
+            vx *= 0.95;
+            vy *= 0.95;
+
+            // Stop calculations when extremely small
+            if (Math.abs(vx) < 0.005) vx = 0;
+            if (Math.abs(vy) < 0.005) vy = 0;
+
+            // Constantly apply base auto-rotation speeds (degrees per ms * dt) plus any momentum
+            currentRx += vy + autoSpeedX * dt;
+            currentRy += vx + autoSpeedY * dt;
+
+            // Constrain X rotation to avoid gimbal lock flip confusion
+            currentRx = Math.max(-85, Math.min(85, currentRx));
+            currentRy = (currentRy + 360) % 360;
+
+            updateCubeTransform();
+          }
+
+          requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        function handleDragStart(e) {
+          isDragging = true;
+          vx = 0;
+          vy = 0;
+          
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          startX = clientX;
+          startY = clientY;
+          
+          document.body.style.userSelect = 'none';
+        }
+
+        function handleDragMove(e) {
+          if (!isDragging) return;
+          
+          // Prevent scroll on mobile touch events while dragging the cube
+          if (e.cancelable) {
+            e.preventDefault();
+          }
+          
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          
+          const deltaX = clientX - startX;
+          const deltaY = clientY - startY;
+          
+          const sensitivity = 0.35;
+          // Capture drag velocity
+          vx = deltaX * sensitivity;
+          vy = -deltaY * sensitivity;
+
+          currentRy += vx;
+          currentRx += vy;
+          currentRx = Math.max(-85, Math.min(85, currentRx));
+          updateCubeTransform();
+          
+          startX = clientX;
+          startY = clientY;
+        }
+
+        function handleDragEnd() {
+          if (!isDragging) return;
+          isDragging = false;
+          document.body.style.userSelect = '';
+        }
+
+        scene.addEventListener('mousedown', handleDragStart);
+        window.addEventListener('mousemove', handleDragMove, { passive: false });
+        window.addEventListener('mouseup', handleDragEnd);
+
+        scene.addEventListener('touchstart', handleDragStart, { passive: true });
+        window.addEventListener('touchmove', handleDragMove, { passive: false });
+        window.addEventListener('touchend', handleDragEnd);
+      }
+
+      // ── Magnetic Buttons Effect ──
+      const magneticBtns = document.querySelectorAll('.magnetic-btn');
+      magneticBtns.forEach(btn => {
+        const content = btn.querySelector('.btn-content');
+        
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const btnX = rect.left + rect.width / 2;
+          const btnY = rect.top + rect.height / 2;
+          
+          const x = e.clientX - btnX;
+          const y = e.clientY - btnY;
+          
+          // Apply magnetic pull strength
+          const strength = 0.35;
+          const mx = x * strength;
+          const my = y * strength;
+          
+          if (content) {
+            content.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+          }
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          if (content) {
+            content.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            content.style.transform = 'translate3d(0, 0, 0)';
+          }
+        });
+        
+        btn.addEventListener('mouseenter', () => {
+          if (content) {
+            content.style.transition = 'none';
+          }
+        });
+      });
+
+      // ── Spotlight Canvas Reveal Effect ──
+      (function() {
+        const canvasWrap = document.getElementById('contact-canvas-wrap');
+        const h1El = document.getElementById('contact-heading');
+        const darkCv = document.getElementById('contact-dark-cv');
+        const lightCv = document.getElementById('contact-light-cv');
+        const cursorEl = document.getElementById('contact-cursor');
+
+        if (!canvasWrap || !h1El || !darkCv || !lightCv || !cursorEl) return;
+
+        const dCtx = darkCv.getContext('2d');
+        const lCtx = lightCv.getContext('2d');
+        const offCv = document.createElement('canvas');
+        const oCtx = offCv.getContext('2d');
+
+        let W = 0, H = 0, dpr = 1;
+        let mx = -9999, my = -9999;
+        let blobR = 0, blobTarget = 0;
+        let problemTextW = 0;
+        let wordCenterX = 0, wordCenterY = 0;
+        let cvMaxDist = 0;
+
+        let lines = [];
+        let fontStr = '';
+        let wordStartX = 0, wordY = 0;
+        let singleLineH = 0;
+
+        // Typewriter state for cycling words
+        const WORDS = ['INNOVATIVE.', 'CREATIVE.', 'REVOLUTIONARY.', 'GREAT.'];
+        let wordIdx = 0;
+        let typePos = 0;
+        let typePhase = 'typing';
+        const CHAR_DELAY = 100;
+        const HOLD_MS = 1200;
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          W = canvasWrap.offsetWidth;
+          H = canvasWrap.offsetHeight;
+
+          darkCv.width = lightCv.width = offCv.width = Math.round(W * dpr);
+          darkCv.height = lightCv.height = offCv.height = Math.round(H * dpr);
+          darkCv.style.width = lightCv.style.width = W + 'px';
+          darkCv.style.height = lightCv.style.height = H + 'px';
+
+          dCtx.scale(dpr, dpr);
+          lCtx.scale(dpr, dpr);
+          oCtx.scale(dpr, dpr);
+        }
+
+        function blobRadius() {
+          const minR = problemTextW > 0 ? problemTextW * 0.15 : 48;
+          const maxR = problemTextW > 0 ? problemTextW * 0.65 : 240;
+          if (cvMaxDist === 0) return minR;
+
+          const dx = mx - wordCenterX;
+          const dy = my - wordCenterY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          const t = 1 - Math.min(dist / cvMaxDist, 1);
+          const tCurved = Math.pow(t, 2.5);
+
+          return Math.max(minR, minR + (maxR - minR) * tCurved);
+        }
+
+        function measureText() {
+          const cs = getComputedStyle(h1El);
+          const fs = parseFloat(cs.fontSize);
+          fontStr = "400 " + fs + "px " + cs.fontFamily;
+
+          const containerRect = canvasWrap.getBoundingClientRect();
+          const lineEls = h1El.querySelectorAll('.contact-line');
+
+          lines = [];
+          lineEls.forEach((el, i) => {
+            const r = el.getBoundingClientRect();
+            lines.push({
+              text: el.textContent.trim().toUpperCase(),
+              x: r.left - containerRect.left,
+              y: r.top - containerRect.top,
+              h: r.height,
+              w: r.width,
+              isTargetLine: i === 2
+            });
+          });
+
+          singleLineH = lines[0] ? lines[0].h : 0;
+
+          if (lines[2]) {
+            const targetWordEl = document.getElementById('contact-target-word');
+            if (targetWordEl) {
+              const targetRect = targetWordEl.getBoundingClientRect();
+              wordStartX = targetRect.left - containerRect.left;
+              wordY = targetRect.top - containerRect.top;
+              problemTextW = targetRect.width;
+            } else {
+              wordStartX = lines[2].x;
+              wordY = lines[2].y;
+              problemTextW = lines[2].w;
+            }
+            wordCenterX = wordStartX + problemTextW / 2;
+            wordCenterY = wordY + singleLineH / 2;
+
+            cvMaxDist = 0;
+            [[0, 0], [W, 0], [0, H], [W, H]].forEach(c => {
+              const d = Math.sqrt((c[0] - wordCenterX) * (c[0] - wordCenterX) + (c[1] - wordCenterY) * (c[1] - wordCenterY));
+              if (d > cvMaxDist) cvMaxDist = d;
+            });
+          }
+        }
+
+        // Dynamically compute light/dark scheme colors
+        function getColors() {
+          const wrapStyle = getComputedStyle(canvasWrap);
+          const h1Style = getComputedStyle(h1El);
+          
+          const bg = wrapStyle.backgroundColor;
+          const ink = h1Style.color;
+          
+          let isDark = true;
+          const rgb = bg.match(/\d+/g);
+          if (rgb) {
+            const r = parseInt(rgb[0]);
+            const g = parseInt(rgb[1]);
+            const b = parseInt(rgb[2]);
+            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            isDark = brightness < 128;
+          }
+          
+          return {
+            defaultBg: bg && bg !== 'rgba(0, 0, 0, 0)' ? bg : '#000000',
+            defaultInk: ink || '#ffffff',
+            revealedBg: isDark ? '#ffffff' : '#1a1c1c',
+            revealedInk: isDark ? '#000000' : '#e2e2e2',
+            accent: '#B90000' // Guardsman Red
+          };
+        }
+
+        function drawDark(colors) {
+          dCtx.clearRect(0, 0, W, H);
+          dCtx.fillStyle = colors.revealedBg;
+          dCtx.fillRect(0, 0, W, H);
+
+          dCtx.font = fontStr;
+          dCtx.textBaseline = 'top';
+          dCtx.textAlign = 'left';
+
+          lines.forEach(l => {
+            if (l.isTargetLine) {
+              dCtx.save();
+              dCtx.transform(1, 0, Math.tan(-8 * Math.PI / 180), 1, l.x, l.y);
+              dCtx.fillStyle = colors.accent;
+              dCtx.fillText(WORDS[wordIdx].slice(0, typePos), 0, 0);
+              dCtx.restore();
+            } else {
+              dCtx.fillStyle = colors.revealedInk;
+              dCtx.fillText(l.text, l.x, l.y);
+            }
+          });
+        }
+
+        function drawLight(colors) {
+          oCtx.clearRect(0, 0, W, H);
+          oCtx.fillStyle = colors.defaultBg;
+          oCtx.fillRect(0, 0, W, H);
+
+          oCtx.font = fontStr;
+          oCtx.textBaseline = 'top';
+          oCtx.textAlign = 'left';
+
+          lines.forEach(l => {
+            if (l.isTargetLine) {
+              oCtx.fillStyle = colors.defaultInk;
+              oCtx.fillText('GREAT.', l.x, l.y);
+            } else {
+              oCtx.fillStyle = colors.defaultInk;
+              oCtx.fillText(l.text, l.x, l.y);
+            }
+          });
+
+          if (blobR > 1 && mx > -100) {
+            oCtx.globalCompositeOperation = 'destination-out';
+            oCtx.beginPath();
+            oCtx.arc(mx, my, blobR, 0, Math.PI * 2);
+            oCtx.fillStyle = 'rgba(0,0,0,1)';
+            oCtx.fill();
+            oCtx.globalCompositeOperation = 'source-over';
+          }
+
+          lCtx.clearRect(0, 0, W, H);
+          lCtx.drawImage(offCv, 0, 0, W, H);
+        }
+
+        function updateCursor() {
+          const d = Math.round(blobR * 2);
+          cursorEl.style.width = d + 'px';
+          cursorEl.style.height = d + 'px';
+          cursorEl.style.left = mx + 'px';
+          cursorEl.style.top = my + 'px';
+        }
+
+        function updateBlob() {
+          if (mx > -100 && my >= 0 && my <= H) {
+            blobTarget = blobRadius();
+          }
+          blobR += (blobTarget - blobR) * 0.12;
+        }
+
+        function loop() {
+          const colors = getColors();
+          updateBlob();
+          drawDark(colors);
+          drawLight(colors);
+          updateCursor();
+          requestAnimationFrame(loop);
+        }
+
+        function getMousePos(e) {
+          const r = canvasWrap.getBoundingClientRect();
+          return { x: e.clientX - r.left, y: e.clientY - r.top };
+        }
+
+        canvasWrap.addEventListener('mousemove', e => {
+          const p = getMousePos(e);
+          mx = p.x;
+          my = p.y;
+          if (my >= 0 && my <= H) {
+            canvasWrap.style.cursor = 'none';
+            cursorEl.style.display = 'block';
+          } else {
+            canvasWrap.style.cursor = '';
+            cursorEl.style.display = 'none';
+            blobTarget = 0;
+          }
+        });
+
+        canvasWrap.addEventListener('mouseleave', () => {
+          canvasWrap.style.cursor = '';
+          cursorEl.style.display = 'none';
+          blobTarget = 0;
+          mx = -9999;
+          my = -9999;
+        });
+
+        canvasWrap.addEventListener('touchmove', e => {
+          const r = canvasWrap.getBoundingClientRect();
+          const t = e.touches[0];
+          mx = t.clientX - r.left;
+          my = t.clientY - r.top;
+          cursorEl.style.display = 'block';
+        }, { passive: true });
+
+        canvasWrap.addEventListener('touchend', () => { blobTarget = 0; mx = -9999; my = -9999; });
+        canvasWrap.addEventListener('touchcancel', () => { blobTarget = 0; mx = -9999; my = -9999; });
+
+        let resizeTick;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTick);
+          resizeTick = setTimeout(() => { resize(); measureText(); }, 150);
+        });
+
+        function typeStep() {
+          if (typePhase === 'typing') {
+            typePos++;
+            if (typePos >= WORDS[wordIdx].length) {
+              typePhase = 'holding';
+              setTimeout(() => {
+                wordIdx = (wordIdx + 1) % WORDS.length;
+                typePos = 0;
+                typePhase = 'typing';
+                setTimeout(typeStep, CHAR_DELAY);
+              }, HOLD_MS);
+            } else {
+              setTimeout(typeStep, CHAR_DELAY);
+            }
+          }
+        }
+        setTimeout(typeStep, CHAR_DELAY);
+
+        function init() {
+          resize();
+          measureText();
+          h1El.style.opacity = '0';
+          h1El.style.pointerEvents = 'none';
+          requestAnimationFrame(loop);
+        }
+
+        // Wait for webfonts to render before taking text measurements
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(init);
+        } else {
+          window.addEventListener('load', init);
+        }
+
+        // ── Custom Cursor Spotlight Handoff ──
+        document.addEventListener('mouseover', e => {
+          const dot = document.querySelector('.custom-cursor-dot');
+          const label = document.querySelector('.custom-cursor-label');
+          if (dot && label) {
+            if (e.target.closest('#contact-canvas-wrap')) {
+              dot.classList.add('cursor-hidden-reveal');
+              label.classList.add('cursor-hidden-reveal');
+            } else {
+              dot.classList.remove('cursor-hidden-reveal');
+              label.classList.remove('cursor-hidden-reveal');
+            }
+          }
+        });
+      })();
+    });
+  })();
+</script>

@@ -1,0 +1,17 @@
+{
+  "name": "shadman-shahriar-portfolio",
+  "version": "1.0.0",
+  "description": "Editorial Minimalist Portfolio — Shadman Shahriar",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ejs": "^3.1.10"
+  },
+  "keywords": ["portfolio", "editorial", "minimalist"],
+  "author": "Shadman Shahriar",
+  "license": "MIT"
+}
