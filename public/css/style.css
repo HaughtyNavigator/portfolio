@@ -673,12 +673,14 @@ body.dark-mode .marquee-content {
   margin-bottom: var(--space-3xl);
 }
 
-.page-header .section-heading {
+.page-header .section-heading,
+.page-header .hero-name {
   margin-bottom: var(--space-md);
 }
 
 .page-header .body-main {
-  max-width: 42rem;
+  max-width: 48rem;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
 }
 
 .page-header .divider {
